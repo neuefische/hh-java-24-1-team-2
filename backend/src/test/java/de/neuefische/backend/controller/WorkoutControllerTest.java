@@ -13,20 +13,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.awt.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.awt.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -44,7 +33,7 @@ class WorkoutControllerTest {
             repo.save(existingTodo);
 
             //WHEN
-            mvc.perform(put("/api/workout/1")
+            mvc.perform(put("/api/workouts/1")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("""
                                     {
@@ -67,7 +56,7 @@ class WorkoutControllerTest {
     void deleteWorkoutById() throws Exception {
         //GIVEN
         //WHEN & THEN
-        mvc.perform(MockMvcRequestBuilders.delete("/api/workout/1"))
+        mvc.perform(MockMvcRequestBuilders.delete("/api/workouts/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
     }
