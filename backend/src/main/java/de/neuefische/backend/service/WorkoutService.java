@@ -10,10 +10,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class WorkoutService {
     private final WorkoutRepo repo;
-    private final IdService idService;
 
     public Workout saveNewWorkout(Workout workout) {
-        Workout temp = workout.withId(idService.generateUUID());
+        Workout temp = workout.withId(null);
         repo.save(temp);
         return repo.findById(temp.getId()).orElseThrow();
     }
