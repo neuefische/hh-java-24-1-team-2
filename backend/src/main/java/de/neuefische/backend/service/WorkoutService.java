@@ -10,4 +10,8 @@ import org.springframework.stereotype.Service;
 public class WorkoutService {
     private final WorkoutRepo repo;
 
+    public String deleteById(String id) {
+        repo.deleteById(id);
+        return "Workout with ID: " + id + " deleted.";
+    }
 }
