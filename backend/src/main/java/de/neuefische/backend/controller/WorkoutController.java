@@ -15,6 +15,11 @@ public class WorkoutController {
         return service.update(id,workout);
     }
 
+    @PostMapping
+    public Workout saveNewStudent(@RequestBody Workout workout){
+        return service.saveNewWorkout(workout);
+    }
+
 
     @DeleteMapping("/{id}")
     public void deleteWorkoutById(@PathVariable String id){
