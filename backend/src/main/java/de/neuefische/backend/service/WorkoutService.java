@@ -6,12 +6,18 @@ import de.neuefische.backend.repository.WorkoutRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
 public class WorkoutService {
     private final WorkoutRepo repo;
 
+    public List<Workout> getAllWorkouts() {
+        return repo.findAll();
+    }
+    public Workout update(String id,Workout workout) {
     public Workout saveNewWorkout(WorkoutDto workoutDto) {
         Workout temp = new Workout(null, workoutDto.getName(), workoutDto.getDescription());
         return repo.save(temp);
