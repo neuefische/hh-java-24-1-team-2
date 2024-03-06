@@ -4,53 +4,47 @@ import de.neuefische.backend.model.Workout;
 import de.neuefische.backend.repository.WorkoutRepo;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 class WorkoutServiceTest {
 
-    private final WorkoutRepo mockRepo = mock(WorkoutRepo.class);
-    WorkoutService service = new WorkoutService(mockRepo);
+    private final WorkoutRepo repo = mock(WorkoutRepo.class);
+    WorkoutService service = new WorkoutService(repo);
 
     @Test
     void deleteById() {
         //GIVEN
-        Workout workout1 = new Workout("1", "Push Up", "Push Up");
         Workout workout2 = new Workout("2", "Pull Up", "Pull Up");
-        List<Workout> workouts= List.of(workout1,workout2);
+        repo.save(workout2);
         String expected = "Workout with ID: 2 deleted.";
         //WHEN
         String actual = service.deleteById("2");
         //THEN
-        assertEquals(expected,actual);
-        verify(mockRepo).deleteById("2");
+        assertEquals(expected, actual);
+        verify(repo).deleteById("2");
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-
-
-class WorkoutServiceTest {
-    WorkoutRepo repo = mock(WorkoutRepo.class);
-    WorkoutService service = new WorkoutService(repo);
+    }
 
     @Test
     void update() {
         //GIVEN
         String id = "123";
-        Workout workout =new Workout(id,"test-name", "test-description");
-        Workout updatedWorkout=new Workout(id,"test-name-change","test-description-change");
+        Workout workout = new Workout(id, "test-name", "test-description");
+        Workout expected = new Workout(id, "test-name-change", "test-description-change");
 
-        when(repo.findById(id)).thenReturn(java.util.Optional.of(workout));
-        when(repo.save(any(Workout.class))).thenReturn(updatedWorkout);
+        when(repo.findById(id)).thenReturn(Optional.of(workout));
+        when(repo.save(any(Workout.class))).thenReturn(expected);
 
         //WHEN
-        Workout actual = service.update(id,updatedWorkout);
+        Workout actual = service.update(id, expected);
 
         //THEN
         verify(repo, times(1)).findById(id);
         verify(repo, times(1)).save(any(Workout.class));
+        assertEquals(expected, actual);
     }
 }
