@@ -51,7 +51,7 @@ class WorkoutControllerTest {
     void getAllWorkouts_ReturnEmptyList_WhenCalledInitially() throws Exception{
         //GIVEN
         //WHEN & THEN
-        mvc.perform(MockMvcRequestBuilders.get("/api/workout"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/workouts"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("[]"))
                 .andReturn();
@@ -62,7 +62,7 @@ class WorkoutControllerTest {
         Workout workout = new Workout("1", "test-name", "test-description");
         repo.save(workout);
         //WHEN & THEN
-        mvc.perform(MockMvcRequestBuilders.get("/api/workout"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/workouts"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
                         [
