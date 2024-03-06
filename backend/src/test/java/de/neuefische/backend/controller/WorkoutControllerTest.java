@@ -1,5 +1,7 @@
 package de.neuefische.backend.controller;
 
+
+import de.neuefische.backend.model.Workout;
 import de.neuefische.backend.repository.WorkoutRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -24,6 +31,31 @@ class WorkoutControllerTest {
 
     @Autowired
     private WorkoutRepo repo;
+    @Test
+    void update() throws Exception {
+            //GIVEN
+            Workout existingTodo = new Workout("1", "test-name", "test-description");
+            repo.save(existingTodo);
+
+            //WHEN
+            mvc.perform(put("/api/workout/1")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("""
+                                    {
+                                        "name": "test-name",
+                                        "description": "test-description"
+                                    }
+                                """))
+                    //THEN
+                    .andExpect(status().isOk())
+                    .andExpect(content().json("""
+                            {
+                                "id": "1",
+                                "name": "test-name",
+                                "description": "test-description"
+                            }
+                        """));
+        }
 
     @Test
     void deleteWorkoutById() throws Exception {
