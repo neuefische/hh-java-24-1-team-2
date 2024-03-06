@@ -4,6 +4,29 @@ import de.neuefische.backend.model.Workout;
 import de.neuefische.backend.repository.WorkoutRepo;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+class WorkoutServiceTest {
+
+    private final WorkoutRepo mockRepo = mock(WorkoutRepo.class);
+    WorkoutService service = new WorkoutService(mockRepo);
+
+    @Test
+    void deleteById() {
+        //GIVEN
+        Workout workout1 = new Workout("1", "Push Up", "Push Up");
+        Workout workout2 = new Workout("2", "Pull Up", "Pull Up");
+        List<Workout> workouts= List.of(workout1,workout2);
+        String expected = "Workout with ID: 2 deleted.";
+        //WHEN
+        String actual = service.deleteById("2");
+        //THEN
+        assertEquals(expected,actual);
+        verify(mockRepo).deleteById("2");
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
