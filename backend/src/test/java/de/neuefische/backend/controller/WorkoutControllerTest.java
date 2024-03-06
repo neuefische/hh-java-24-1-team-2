@@ -38,7 +38,7 @@ class WorkoutControllerTest {
             repo.save(existingTodo);
 
             //WHEN
-            mvc.perform(put("/api/workout/1")
+            mvc.perform(put("/api/workouts/1")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("""
                                     {
