@@ -48,6 +48,35 @@ class WorkoutControllerTest {
     }
 
     @Test
+    void getAllWorkouts_ReturnEmptyList_WhenCalledInitially() throws Exception{
+        //GIVEN
+        //WHEN & THEN
+        mvc.perform(MockMvcRequestBuilders.get("/api/workout"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("[]"))
+                .andReturn();
+    }
+    @Test
+    void getAllWorkouts_ReturnId1nameTestNameDescriptionTestDescription_WhenCalledWithOneWorkout() throws Exception {
+        //GIVEN
+        Workout workout = new Workout("1", "test-name", "test-description");
+        repo.save(workout);
+        //WHEN & THEN
+        mvc.perform(MockMvcRequestBuilders.get("/api/workout"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                        [
+                            {
+                                "id": "1",
+                                "name": "test-name",
+                                "description": "test-description"
+                            }
+                        ]
+                    """))
+                .andReturn();
+    }
+
+    @Test
     void update() throws Exception {
             //GIVEN
             Workout existingTodo = new Workout("1", "test-name", "test-description");
@@ -72,7 +101,6 @@ class WorkoutControllerTest {
                             }
                         """));
         }
-
     @Test
     void deleteWorkoutById() throws Exception {
         //GIVEN

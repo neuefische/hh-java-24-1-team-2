@@ -5,6 +5,7 @@ import de.neuefische.backend.model.WorkoutDto;
 import de.neuefische.backend.repository.WorkoutRepo;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,7 +45,28 @@ class WorkoutServiceTest {
         verify(repo).deleteById("2");
 
     }
-
+    @Test
+    void getAllWorkouts_shouldReturnEmptyList_whenCalledInitially() {
+        //GIVEN
+        List<Workout> expected = List.of();
+        when(repo.findAll()).thenReturn(expected);
+        //WHEN
+        List<Workout> actual = service.getAllWorkouts();
+        //THEN
+        assertEquals(expected, actual);
+        verify(repo).findAll();
+    }
+    @Test
+    void getAllWorkouts_ReturnList1_WhenCalled() {
+        //GIVEN
+        List<Workout> expected = List.of(new Workout("1", "test-name", "test-description"));
+        when(repo.findAll()).thenReturn(expected);
+        //WHEN
+        List<Workout> actual = service.getAllWorkouts();
+        //THEN
+        assertEquals(expected, actual);
+        verify(repo).findAll();
+    }
     @Test
     void update() {
         //GIVEN
