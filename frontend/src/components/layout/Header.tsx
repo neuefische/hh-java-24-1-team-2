@@ -5,7 +5,6 @@ export default function Header() {
             <header>
                 <h1>Fitness Freaks</h1>
                 <Navigation/>
-
             </header>
     )
 }
