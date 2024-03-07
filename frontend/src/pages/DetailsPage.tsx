@@ -19,6 +19,11 @@ export default function DetailsPage(props: Readonly<DetailsPageProps>) {
             navigate("/");
         }
     }
+    function handleEdit() {
+        if (workout !== undefined) {
+            navigate(`/workouts/`+workout.id+`/edit`);
+        }
+    }
 
     return (
         <div>
@@ -28,6 +33,7 @@ export default function DetailsPage(props: Readonly<DetailsPageProps>) {
                     <h3>{workout.name}</h3>
                     <p>Description: {workout.description}</p>
                     <button onClick={handleDelete}>Delete</button>
+                    <button onClick={handleEdit}>Edit</button>
                 </div> :
                 <>No workout found</>
             }
