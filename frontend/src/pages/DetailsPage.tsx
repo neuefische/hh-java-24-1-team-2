@@ -23,7 +23,6 @@ export default function DetailsPage(props: Readonly<DetailsPageProps>) {
     return (
         <div>
             <h1>Details Page</h1>
-            <p>View the details of your workout here</p>
             {workout ?
                 <div className={"workoutDetails"}>
                     <h3>{workout.name}</h3>
