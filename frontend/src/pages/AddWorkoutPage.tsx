@@ -1,12 +1,11 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import axios from 'axios';
+import "./AddWorkoutPage.css";
 
 type Input = {
     name: string;
     description: string;
 };
-
-type AddWorkoutPageProps = {};
 
 export default function AddWorkoutPage() {
     const [formData, setFormData] = useState<Input>({ name: '', description: '' });
@@ -41,21 +40,24 @@ export default function AddWorkoutPage() {
 
     return (
 
-        <form onSubmit={handleOnSubmit}>
-            <div>
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" name="name" value={formData.name} onChange={handleChangeName} />
-            </div>
-            <div>
-                <label htmlFor="description">Description:</label>
-                <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChangeDescription}
-                />
-            </div>
-            <button type="submit">Add Workout</button>
-        </form>
+        <div className="container">
+            <h2>Please add a new workout here:</h2>
+            <form onSubmit={handleOnSubmit}>
+                <div>
+                    <label htmlFor="name">Name:</label>
+                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChangeName}/>
+                </div>
+                <div>
+                    <label htmlFor="description">Description:</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChangeDescription}
+                    />
+                </div>
+                <button type="submit">Add Workout</button>
+            </form>
+        </div>
     );
 }
