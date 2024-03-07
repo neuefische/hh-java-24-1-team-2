@@ -1,6 +1,7 @@
 package de.neuefische.backend.service;
 
 import de.neuefische.backend.model.Workout;
+import de.neuefische.backend.model.WorkoutDto;
 import de.neuefische.backend.repository.WorkoutRepo;
 import org.junit.jupiter.api.Test;
 
@@ -18,12 +19,12 @@ class WorkoutServiceTest {
     @Test
     void saveNewWorkout() {
         // GIVEN
-        Workout workout = new Workout("1", "Push Up", "Do the push up");
+        WorkoutDto workoutDto = new WorkoutDto("Push Up", "Do the push up");
         when(repo.save(any(Workout.class)))
-                .thenReturn(new Workout("generated-id", workout.getName(), workout.getDescription()));
+                .thenReturn(new Workout("generated-id", workoutDto.getName(), workoutDto.getDescription()));
 
         // WHEN
-        Workout savedWorkout = service.saveNewWorkout(workout);
+        Workout savedWorkout = service.saveNewWorkout(workoutDto);
 
         // THEN
         assertEquals("generated-id", savedWorkout.getId());

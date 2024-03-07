@@ -1,6 +1,7 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.model.Workout;
+import de.neuefische.backend.model.WorkoutDto;
 import de.neuefische.backend.service.WorkoutService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,8 @@ public class WorkoutController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Workout saveNewWorkout(@RequestBody Workout workout){
-        return service.saveNewWorkout(workout);
+    public Workout saveNewWorkout(@RequestBody WorkoutDto workoutDto) {
+        return service.saveNewWorkout(workoutDto);
     }
 
 
