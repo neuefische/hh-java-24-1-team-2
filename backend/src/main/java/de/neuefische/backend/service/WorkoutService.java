@@ -13,8 +13,7 @@ public class WorkoutService {
 
     public Workout saveNewWorkout(Workout workout) {
         Workout temp = workout.withId(null);
-        repo.save(temp);
-        return repo.findById(temp.getId()).orElseThrow();
+        return repo.save(temp);
     }
 
     public Workout update(String id,Workout workout) {

@@ -16,6 +16,21 @@ class WorkoutServiceTest {
     WorkoutService service = new WorkoutService(repo);
 
     @Test
+    void saveNewWorkout() {
+        // GIVEN
+        Workout workout = new Workout("1", "Push Up", "Do the push up");
+        when(repo.save(any(Workout.class)))
+                .thenReturn(new Workout("generated-id", workout.getName(), workout.getDescription()));
+
+        // WHEN
+        Workout savedWorkout = service.saveNewWorkout(workout);
+
+        // THEN
+        assertEquals("generated-id", savedWorkout.getId());
+        verify(repo, times(1)).save(any(Workout.class));
+    }
+
+    @Test
     void deleteById() {
         //GIVEN
         Workout workout2 = new Workout("2", "Pull Up", "Pull Up");
