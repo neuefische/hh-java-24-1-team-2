@@ -22,7 +22,7 @@ export default function App() {
         <div>
             <Header/>
             <Routes>
-                <Route path="/" element={<HomePage/>}/>
+                <Route path="/" element={<HomePage workouts={workouts} setWorkouts={setWorkouts}/>}/>
                 <Route path="/workouts/:id" element={<DetailsPage workouts={workouts} fetchData={fetchData}/>}/>
                 <Route path="/workouts/add" element={<AddWorkoutPage/>}/>
                 <Route path="/workouts/:id/edit" element={<EditWorkoutPage/>}/>

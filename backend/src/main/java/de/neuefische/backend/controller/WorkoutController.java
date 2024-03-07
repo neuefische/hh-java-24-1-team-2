@@ -18,6 +18,11 @@ public class WorkoutController {
     public List<Workout> getAllWorkouts(){
         return service.getAllWorkouts();
     }
+    @GetMapping("/{id}")
+    public Workout getWorkoutById(@PathVariable String id){
+        return service.getWorkoutById(id);
+    }
+
     @PutMapping("/{id}")
     public Workout update(@PathVariable String id,@RequestBody Workout workout){
         return service.update(id,workout);

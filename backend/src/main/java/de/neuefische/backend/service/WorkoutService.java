@@ -17,7 +17,10 @@ public class WorkoutService {
     public List<Workout> getAllWorkouts() {
         return repo.findAll();
     }
-    public Workout update(String id,Workout workout) {
+    public Workout getWorkoutById(String id) {
+        return repo.findById(id).orElseThrow();
+    }
+
     public Workout saveNewWorkout(WorkoutDto workoutDto) {
         Workout temp = new Workout(null, workoutDto.getName(), workoutDto.getDescription());
         return repo.save(temp);
@@ -33,4 +36,6 @@ public class WorkoutService {
         repo.deleteById(id);
         return "Workout with ID: " + id + " deleted.";
     }
+
+
 }

@@ -14,9 +14,9 @@ export default function DetailsPage(props: Readonly<DetailsPageProps>) {
 
     function handleDelete(){
         if(workout !== undefined){
-            axios.delete("/api/workouts/"+workout.id)
+            axios.delete(`/api/workouts/`+workout.id)
                 .then(props.fetchData);
-            navigate("/workouts");
+            navigate("/");
         }
     }
 
