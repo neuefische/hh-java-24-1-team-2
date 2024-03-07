@@ -46,7 +46,6 @@ class WorkoutControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("New Workout"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.description").value("Description for the new workout"));
     }
-
     @Test
     void getAllWorkouts_ReturnEmptyList_WhenCalledInitially() throws Exception{
         //GIVEN
@@ -72,6 +71,23 @@ class WorkoutControllerTest {
                                 "description": "test-description"
                             }
                         ]
+                    """))
+                .andReturn();
+    }
+    @Test
+    void getWorkoutById_ReturnWorkoutWithId1_WhenCalledWithId1() throws Exception {
+        //GIVEN
+        Workout workout = new Workout("1", "test-name", "test-description");
+        repo.save(workout);
+        //WHEN & THEN
+        mvc.perform(MockMvcRequestBuilders.get("/api/workouts/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                        {
+                            "id": "1",
+                            "name": "test-name",
+                            "description": "test-description"
+                        }
                     """))
                 .andReturn();
     }

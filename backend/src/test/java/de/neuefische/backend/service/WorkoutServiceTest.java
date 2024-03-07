@@ -68,6 +68,18 @@ class WorkoutServiceTest {
         verify(repo).findAll();
     }
     @Test
+    void getWorkoutById_ReturnWorkoutWithId1_WhenCalledWithId1() {
+        //GIVEN
+        String id = "1";
+        Workout expected = new Workout(id, "test-name", "test-description");
+        when(repo.findById(id)).thenReturn(Optional.of(expected));
+        //WHEN
+        Workout actual = service.getWorkoutById(id);
+        //THEN
+        assertEquals(expected, actual);
+        verify(repo).findById(id);
+    }
+    @Test
     void update() {
         //GIVEN
         String id = "123";
