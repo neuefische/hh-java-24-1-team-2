@@ -26,6 +26,27 @@ class WorkoutControllerTest {
 
     @Autowired
     private WorkoutRepo repo;
+
+    @Test
+    void saveNewWorkout() throws Exception {
+        // GIVEN
+        String requestBody = """
+                {
+                    "name": "New Workout",
+                    "description": "Description for the new workout"
+                }
+            """;
+
+        // WHEN & THEN
+        mvc.perform(MockMvcRequestBuilders.post("/api/workouts")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("New Workout"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.description").value("Description for the new workout"));
+    }
+
     @Test
     void update() throws Exception {
             //GIVEN
