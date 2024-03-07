@@ -1,6 +1,6 @@
 import { Workout } from "../types/Workout.ts";
 import axios from "axios";
-import { useState } from "react";
+import {FormEvent, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import "/src/App.css"
 export type Props = {
@@ -22,7 +22,7 @@ export default function EditWorkoutPage(props: Props) {
         setName(event.target.value);
     }
 
-    function editThisItem(event: React.FormEvent<HTMLFormElement>) {
+    function editThisItem(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if(workout !== undefined) {
             axios.put("/api/workouts/" + workout.id, {
