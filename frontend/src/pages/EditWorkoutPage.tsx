@@ -5,14 +5,15 @@ import {useNavigate, useParams} from "react-router-dom";
 import "/src/App.css"
 export type Props = {
     workouts: Workout[],
+    fetchData: ()=>void
 };
 export default function EditWorkoutPage(props: Props) {
     const params = useParams();
     const navigate = useNavigate();
 
     const workout = props.workouts.find(workout => workout.id === params.id);
-    const [name, setName] = useState(workout?.name || '');
-    const [description, setDescription] = useState(workout?.description || '');
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
 
     function changeText(event: React.ChangeEvent<HTMLInputElement>) {
         setDescription(event.target.value);
@@ -29,15 +30,9 @@ export default function EditWorkoutPage(props: Props) {
                 name: name,
                 description: description,
             })
-                .then(response => {
-                    // Handle successful response if needed
-                    console.log("Workout updated successfully:", response.data);
+                .then(props.fetchData);
+
                     navigate("/workouts");
-                })
-                .catch(error => {
-                    // Handle error if needed
-                    console.error("Error updating workout:", error);
-                });
         }
     }
 
