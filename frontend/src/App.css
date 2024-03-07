@@ -1,0 +1,44 @@
+.edit-workout-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.edit-workout-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.edit-workout-container p {
+    margin-bottom: 20px;
+}
+
+.edit-workout-container form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.edit-workout-container form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.edit-workout-container form button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-workout-container form button:hover {
+    background-color: #45a049;
+}
