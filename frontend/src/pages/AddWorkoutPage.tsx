@@ -1,7 +1,6 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import axios from 'axios';
 import "./AddWorkoutPage.css";
-import {useNavigate} from "react-router-dom";
 
 type Input = {
     name: string;
@@ -10,7 +9,6 @@ type Input = {
 
 export default function AddWorkoutPage() {
     const [formData, setFormData] = useState<Input>({ name: '', description: '' });
-    const navigate = useNavigate();
 
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -35,7 +33,6 @@ export default function AddWorkoutPage() {
             await axios.post('/api/workouts', formData);
             setFormData({ name: '', description: '' });
             alert(`Thanks. Workout "${formData.name}" added.`);
-            navigate("/");
         } catch (error) {
             console.error('Error submitting form:', error);
         }

@@ -31,8 +31,7 @@ export default function EditWorkoutPage(props: Props) {
                 description: description,
             })
                 .then(props.fetchData);
-
-                    navigate("/");
+                    navigate("/workouts/"+ workout.id);
         }
     }
 
