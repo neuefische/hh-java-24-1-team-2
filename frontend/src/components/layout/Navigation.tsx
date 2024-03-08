@@ -1,5 +1,4 @@
 import {Link} from "react-router-dom";
-import "/src/App.css"
 import {MdHome} from "react-icons/md";
 import { GrAdd } from "react-icons/gr";
 
