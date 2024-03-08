@@ -82,11 +82,29 @@
     background-color: darkslategray;
 }
 
-.body{
-    font-family: Arial;
+body{
+    font-family: Arial,sans-serif;
 }
 .homepage{
     margin: 60px;
     font-size: large;
-    font-family: Bahnschrift;
+    font-family: Bahnschrift,sans-serif;
+}
+.foot{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: lightsteelblue;
+    padding: 10px;
+}
+.foot ul{
+    list-style-type: none;
+
+}
+.foot li{
+    display: inline-block;
+    margin-right: 45px;
+
 }

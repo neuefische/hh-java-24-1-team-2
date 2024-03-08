@@ -1,7 +1,7 @@
 import {Workout} from "../types/Workout.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import "/src/App.css"
+
 
 type DetailsPageProps={
     workouts: Workout[],
