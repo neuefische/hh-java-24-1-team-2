@@ -8,4 +8,6 @@ import lombok.Data;
 public class WorkoutDto {
     private String name;
     private String description;
+    private Category category;
+    private MuscleGroup muscleGroup;
 }

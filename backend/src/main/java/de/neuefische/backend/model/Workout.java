@@ -15,6 +15,6 @@ public class Workout {
     private String id;
     private String name;
     private String description;
-
-
+    private Category category;
+    private MuscleGroup muscleGroup;
 }
