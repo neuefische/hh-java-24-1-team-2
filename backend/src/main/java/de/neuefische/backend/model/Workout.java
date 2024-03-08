@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.With;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @With
 @NoArgsConstructor
@@ -15,6 +18,6 @@ public class Workout {
     private String id;
     private String name;
     private String description;
-    private Category category;
-    private MuscleGroup muscleGroup;
+    private List<SportsCategory> categories = new ArrayList<>();
+    private List<MuscleGroup> muscleGroups = new ArrayList<>();
 }
