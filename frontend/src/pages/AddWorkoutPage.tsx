@@ -1,18 +1,14 @@
 import {ChangeEvent, FormEvent, useState} from "react";
-import axios from 'axios';
+import {addWorkoutToLibrary, Workout} from "../utility_functions/addWorkout";
 import "./AddWorkoutPage.css";
 import {SelectChangeEvent} from "@mui/material";
 import CategoryMuscleCheckbox from "../components/CategoryMuscleCheckbox.tsx";
 
-type Input = {
-    name: string;
-    description: string;
-};
-
 export default function AddWorkoutPage() {
-    const [formData, setFormData] = useState<Input>({ name: '', description: '' });
     const [categories, setCategories]=useState<string[]>([]);
     const [muscleGroups, setMuscleGroups]=useState<string[]>([]);
+    const [formData, setFormData] = useState<Workout>({ name: '', description: '' });
+
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setFormData((prevData) => ({
@@ -49,16 +45,10 @@ export default function AddWorkoutPage() {
 
     const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        try {
-            await axios.post('/api/workouts', formData);
-            setFormData({ name: '', description: '' });
-            setCategories([]);
-            setMuscleGroups([]);
-            alert(`Thanks. Workout "${formData.name}" added.`);
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
+        await addWorkoutToLibrary(formData);
+        setFormData({ name: '', description: '' });
+        setCategories([]);
+        setMuscleGroups([]);
     };
 
     return (

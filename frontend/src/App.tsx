@@ -9,6 +9,7 @@ import {useState} from "react";
 import {Workout} from "./types/Workout.ts";
 import Footer from "./components/layout/Footer.tsx";
 import axios from "axios";
+import GenerateWorkoutPage from "./pages/GenerateWorkoutPage.tsx";
 
 export default function App() {
     const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -26,6 +27,7 @@ export default function App() {
                 <Route path="/workouts/:id" element={<DetailsPage workouts={workouts} fetchData={fetchData}/>}/>
                 <Route path="/workouts/add" element={<AddWorkoutPage/>}/>
                 <Route path="/workouts/:id/edit" element={<EditWorkoutPage workouts={workouts} fetchData={fetchData}/>} />
+                <Route path="/workouts/generate" element={<GenerateWorkoutPage/>}/>
             </Routes>
             <Footer/>
         </div>
