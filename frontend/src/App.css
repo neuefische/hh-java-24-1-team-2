@@ -31,7 +31,7 @@
 
 .edit-workout-container form button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: darkslategray;
     color: white;
     border: none;
     border-radius: 5px;
@@ -40,5 +40,60 @@
 }
 
 .edit-workout-container form button:hover {
-    background-color: #45a049;
+    background-color: darkslategray;
+}
+.nav {
+    background-color: lightsteelblue;
+    padding: 10px;
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-top: 0;
+}
+
+.nav a {
+    display: block;
+    color: black;
+    text-decoration: none;
+
+}
+.ul {
+    margin: 0;
+    font-size: 22px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 10px;
+    list-style: none;
+
+}
+.container {
+    text-align: center;
+}
+
+.workoutDetails {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.workoutDetails h3 {
+    margin-top: 0;
+}
+
+.workoutDetails p {
+    margin-bottom: 10px;
+}
+
+.workoutDetails button {
+    margin-right: 10px;
+    background-color: darkslategray;
+}
+
+.body{
+    font-family: Arial;
+}
+.homepage{
+    margin: 60px;
+    font-size: large;
+    font-family: Bahnschrift;
 }
