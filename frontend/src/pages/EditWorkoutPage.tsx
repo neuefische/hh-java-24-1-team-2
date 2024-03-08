@@ -2,7 +2,7 @@ import { Workout } from "../types/Workout.ts";
 import axios from "axios";
 import {FormEvent, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import "/src/App.css"
+
 export type Props = {
     workouts: Workout[],
     fetchData: ()=>void

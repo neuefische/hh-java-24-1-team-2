@@ -2,7 +2,6 @@ import {Workout} from "../types/Workout.ts";
 import {useEffect} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
-import "/src/App.css"
 
 type HomePageProps = {
     workouts: Workout[]
