@@ -32,14 +32,16 @@ export default function EditWorkoutPage(props: Props) {
             })
                 .then(props.fetchData);
 
-                    navigate("/workouts");
+                    navigate("/");
         }
     }
 
     return (
         <>
+            <div style={{textAlign:"center"}}>
             <h1>Edit Workout Page</h1>
             <div className="edit-workout-container">
+
                 <p>Edit your workout here</p>
                 <form onSubmit={editThisItem}>
                     <label>
@@ -54,6 +56,7 @@ export default function EditWorkoutPage(props: Props) {
                     <br/>
                     <button type="submit">Edit</button>
                 </form>
+            </div>
             </div>
         </>
     );
