@@ -19,6 +19,9 @@ export default function Navigation() {
                         <Link to={"/workouts/add"}>
                             <GrAdd className="icon"/>Add Workout
                         </Link>
+                        <Link to={"/workouts/generate"}>
+                            <GrAdd style={{verticalAlign: 'top', marginRight: '6px'}}/>Generate Workout
+                        </Link>
                     </li>
                 </ul>
             </nav>
