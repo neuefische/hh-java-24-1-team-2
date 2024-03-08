@@ -1,6 +1,7 @@
 package de.neuefische.backend.controller;
 
-
+import de.neuefische.backend.model.MuscleGroup;
+import de.neuefische.backend.model.SportsCategory;
 import de.neuefische.backend.model.Workout;
 import de.neuefische.backend.repository.WorkoutRepo;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -31,11 +34,11 @@ class WorkoutControllerTest {
     void saveNewWorkout() throws Exception {
         // GIVEN
         String requestBody = """
-                {
-                    "name": "New Workout",
-                    "description": "Description for the new workout"
-                }
-            """;
+                    {
+                        "name": "New Workout",
+                        "description": "Description for the new workout"
+                    }
+                """;
 
         // WHEN & THEN
         mvc.perform(MockMvcRequestBuilders.post("/api/workouts")
@@ -46,8 +49,9 @@ class WorkoutControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("New Workout"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.description").value("Description for the new workout"));
     }
+
     @Test
-    void getAllWorkouts_ReturnEmptyList_WhenCalledInitially() throws Exception{
+    void getAllWorkouts_ReturnEmptyList_WhenCalledInitially() throws Exception {
         //GIVEN
         //WHEN & THEN
         mvc.perform(MockMvcRequestBuilders.get("/api/workouts"))
@@ -55,68 +59,79 @@ class WorkoutControllerTest {
                 .andExpect(MockMvcResultMatchers.content().json("[]"))
                 .andReturn();
     }
+
     @Test
     void getAllWorkouts_ReturnId1nameTestNameDescriptionTestDescription_WhenCalledWithOneWorkout() throws Exception {
         //GIVEN
-        Workout workout = new Workout("1", "test-name", "test-description");
+        Workout workout = new Workout("1", "test-name", "test-description", List.of(SportsCategory.HIIT, SportsCategory.CARDIO), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
         repo.save(workout);
         //WHEN & THEN
         mvc.perform(MockMvcRequestBuilders.get("/api/workouts"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
-                        [
-                            {
-                                "id": "1",
-                                "name": "test-name",
-                                "description": "test-description"
-                            }
-                        ]
-                    """))
+                            [
+                                {
+                                    "id": "1",
+                                    "name": "test-name",
+                                    "description": "test-description",
+                                    "categories": ["HIIT", "CARDIO"],
+                                    "muscleGroups": ["LEGS", "GLUTES"]
+                                }
+                            ]
+                        """))
                 .andReturn();
     }
+
     @Test
     void getWorkoutById_ReturnWorkoutWithId1_WhenCalledWithId1() throws Exception {
         //GIVEN
-        Workout workout = new Workout("1", "test-name", "test-description");
+        Workout workout = new Workout("1", "test-name", "test-description", List.of(SportsCategory.HIIT, SportsCategory.CARDIO), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
         repo.save(workout);
         //WHEN & THEN
         mvc.perform(MockMvcRequestBuilders.get("/api/workouts/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
-                        {
-                            "id": "1",
-                            "name": "test-name",
-                            "description": "test-description"
-                        }
-                    """))
+                            {
+                                "id": "1",
+                                "name": "test-name",
+                                "description": "test-description",
+                                "categories": ["HIIT", "CARDIO"],
+                                "muscleGroups": ["LEGS", "GLUTES"]
+                            }
+                        """))
                 .andReturn();
     }
 
     @Test
     void update() throws Exception {
-            //GIVEN
-            Workout existingTodo = new Workout("1", "test-name", "test-description");
-            repo.save(existingTodo);
+        //GIVEN
+        Workout existingTodo = new Workout("1", "test-name", "test-description", List.of(SportsCategory.HIIT, SportsCategory.CARDIO), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
+        repo.save(existingTodo);
 
-            //WHEN
-            mvc.perform(put("/api/workouts/1")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content("""
+        //WHEN
+        mvc.perform(put("/api/workouts/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
                                     {
                                         "name": "test-name",
-                                        "description": "test-description"
+                                        "description": "test-description",
+                                "categories": ["HIIT", "CARDIO"],
+                                "muscleGroups": ["LEGS", "GLUTES"]
                                     }
                                 """))
-                    //THEN
-                    .andExpect(status().isOk())
-                    .andExpect(content().json("""
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
                             {
                                 "id": "1",
                                 "name": "test-name",
-                                "description": "test-description"
+                                "description": "test-description",
+                                "categories": ["HIIT", "CARDIO"],
+                                "muscleGroups": ["LEGS", "GLUTES"]
                             }
                         """));
-        }
+    }
+
     @Test
     void deleteWorkoutById() throws Exception {
         //GIVEN
