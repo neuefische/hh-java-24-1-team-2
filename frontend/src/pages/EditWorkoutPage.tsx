@@ -28,18 +28,14 @@ export default function EditWorkoutPage(props: Props) {
     }
 
     function changeCategories(event: SelectChangeEvent<typeof categories>) {
-        const {
-            target: {value},
-        }=event;
+        const value=event.target.value;
         setCategories(typeof value === 'string' ? value.split(',') : value,);
     }
 
     const optionalCategories=Object.values(SportsCategory);
 
     function changeMuscleGroups(event: SelectChangeEvent<typeof muscleGroups>) {
-        const {
-            target: {value},
-        }=event;
+        const value=event.target.value;
         setMuscleGroups(typeof value === 'string' ? value.split(',') : value,);
     }
 
