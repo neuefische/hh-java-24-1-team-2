@@ -33,6 +33,8 @@ export default function DetailsPage(props: Readonly<DetailsPageProps>) {
                 <div className={"workoutDetails"}>
                     <h3>{workout.name}</h3>
                     <p>Description: {workout.description}</p>
+                    <p>Categories: {workout.categories.join(', ')}</p>
+                    <p>Muscle Groups: {workout.muscleGroups.join(', ')}</p>
                     <button onClick={handleDelete}>Delete</button>
                     <button onClick={handleEdit}>Edit</button>
                 </div> :
