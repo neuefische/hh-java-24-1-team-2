@@ -71,7 +71,7 @@ export default function GenerateWorkoutPage() {
                     <h3>Generated Workouts:</h3>
                     <ul>
                         {generatedData.map((workout, index) => (
-                            <li key={index}>
+                            <li key={`workout_${index}`}>
                                 <strong>Name:</strong> {workout.name}, <strong>Description:</strong> {workout.description}
                                 <button onClick={() => handleAddToLibrary(workout)}>Add to Library</button>
                             </li>
