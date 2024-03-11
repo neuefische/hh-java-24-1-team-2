@@ -54,7 +54,7 @@ export default function EditWorkoutPage(props: Props) {
 
     return (
         <>
-            <div style={{textAlign:"center"}}>
+            <div className="edit-title">
             <h1>Edit Workout Page</h1>
             <div className="edit-workout-container">
 
