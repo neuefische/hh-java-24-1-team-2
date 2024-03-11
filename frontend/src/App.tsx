@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage.tsx";
 import AddWorkoutPage from "./pages/AddWorkoutPage.tsx";
 import EditWorkoutPage from "./pages/EditWorkoutPage.tsx";
 import DetailsPage from "./pages/DetailsPage.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Workout} from "./types/Workout.ts";
 import Footer from "./components/layout/Footer.tsx";
 import axios from "axios";
@@ -16,7 +16,15 @@ export default function App() {
 
     function fetchData(){
         axios.get("/api/workouts")
-            .then(response=>setWorkouts(response.data));
+            .then(response=>setWorkouts(response.data))
+            .catch(error => {
+            console.error("Error fetching workouts", error)
+        })
+    }
+
+    useEffect(fetchData, []);
+    if (!workouts) {
+        return "Loading..."
     }
 
     return (
