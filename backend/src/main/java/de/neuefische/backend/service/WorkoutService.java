@@ -1,7 +1,5 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.model.MuscleGroup;
-import de.neuefische.backend.model.SportsCategory;
 import de.neuefische.backend.model.Workout;
 import de.neuefische.backend.model.WorkoutDto;
 import de.neuefische.backend.repository.WorkoutRepo;
@@ -21,14 +19,6 @@ public class WorkoutService {
 
     public Workout getWorkoutById(String id) {
         return repo.findById(id).orElseThrow();
-    }
-
-    public List<Workout> filterWorkout(String name, SportsCategory category, MuscleGroup muscle) {
-        return repo.findAll().stream()
-                .filter(workout -> workout.getName().equals(name) ||
-                                    workout.getCategories().contains(category) ||
-                                    workout.getMuscleGroups().contains(muscle))
-                .toList();
     }
 
     public Workout saveNewWorkout(WorkoutDto workoutDto) {

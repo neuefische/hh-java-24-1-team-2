@@ -1,7 +1,5 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.model.MuscleGroup;
-import de.neuefische.backend.model.SportsCategory;
 import de.neuefische.backend.model.Workout;
 import de.neuefische.backend.model.WorkoutDto;
 import de.neuefische.backend.service.WorkoutService;
@@ -23,13 +21,6 @@ public class WorkoutController {
     @GetMapping("/{id}")
     public Workout getWorkoutById(@PathVariable String id){
         return service.getWorkoutById(id);
-    }
-
-    @GetMapping("/filter")
-    public List<Workout> filterWorkout(@RequestParam(required = false) String name,
-                                       @RequestParam(required = false) SportsCategory category,
-                                       @RequestParam(required = false) MuscleGroup muscle){
-        return service.filterWorkout(name, category, muscle);
     }
 
     @PutMapping("/{id}")

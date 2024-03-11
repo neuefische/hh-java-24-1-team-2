@@ -1,8 +1,8 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import axios from 'axios';
 import "./AddWorkoutPage.css";
-import {FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent} from "@mui/material";
-import {MuscleGroup, SportsCategory} from "../types/Workout.ts";
+import {SelectChangeEvent} from "@mui/material";
+import CategoryMuscleCheckbox from "../components/CategoryMuscleCheckbox.tsx";
 
 type Input = {
     name: string;
@@ -38,8 +38,6 @@ export default function AddWorkoutPage() {
         }));
     }
 
-    const optionalCategories=Object.values(SportsCategory);
-
     function changeMuscleGroups(event: SelectChangeEvent<typeof muscleGroups>) {
         const value=event.target.value;
         setMuscleGroups(typeof value === 'string' ? value.split(',') : value,);
@@ -48,8 +46,6 @@ export default function AddWorkoutPage() {
             muscleGroups: muscleGroups,
         }));
     }
-
-    const optionalMuscles=Object.values(MuscleGroup);
 
     const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -64,8 +60,6 @@ export default function AddWorkoutPage() {
             console.error('Error submitting form:', error);
         }
     };
-
-
 
     return (
 
@@ -85,40 +79,7 @@ export default function AddWorkoutPage() {
                         onChange={handleChangeDescription}
                     />
                 </div>
-                <FormControl sx={{ m: 1, width: 300 }}>
-                    <InputLabel>Categories</InputLabel>
-                    <Select
-                        multiple
-                        value={categories}
-                        onChange={changeCategories}
-                        input={<OutlinedInput label="Categories" />}
-                    >
-                        {optionalCategories.map(category=>
-                            <MenuItem
-                                value={category}
-                            >
-                                {category}
-                            </MenuItem>
-                        )}
-                    </Select>
-                </FormControl>
-                <FormControl sx={{ m: 1, width: 300 }}>
-                    <InputLabel>Muscle Groups</InputLabel>
-                    <Select
-                        multiple
-                        value={muscleGroups}
-                        onChange={changeMuscleGroups}
-                        input={<OutlinedInput label="MuscleGroups" />}
-                    >
-                        {optionalMuscles.map(muscle=>
-                            <MenuItem
-                                value={muscle}
-                            >
-                                {muscle}
-                            </MenuItem>
-                        )}
-                    </Select>
-                </FormControl>
+                <CategoryMuscleCheckbox categories={categories} changeCategories={changeCategories} muscleGroups={muscleGroups} changeMuscleGroups={changeMuscleGroups}/>
                 <button type="submit">Add Workout</button>
             </form>
         </div>

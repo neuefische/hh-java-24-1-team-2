@@ -1,9 +1,10 @@
-import {MuscleGroup, SportsCategory, Workout} from "../types/Workout.ts";
+import {Workout} from "../types/Workout.ts";
 import axios from "axios";
 import {FormEvent, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import "/src/App.css"
-import {FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent} from "@mui/material";
+import CategoryMuscleCheckbox from "../components/CategoryMuscleCheckbox.tsx";
+import {SelectChangeEvent} from "@mui/material";
 
 export type Props = {
     workouts: Workout[],
@@ -32,14 +33,10 @@ export default function EditWorkoutPage(props: Props) {
         setCategories(typeof value === 'string' ? value.split(',') : value,);
     }
 
-    const optionalCategories=Object.values(SportsCategory);
-
     function changeMuscleGroups(event: SelectChangeEvent<typeof muscleGroups>) {
         const value=event.target.value;
         setMuscleGroups(typeof value === 'string' ? value.split(',') : value,);
     }
-
-    const optionalMuscles=Object.values(MuscleGroup);
 
     function editThisItem(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -73,41 +70,7 @@ export default function EditWorkoutPage(props: Props) {
                         <input type="text" value={description} onChange={changeText}/>
                     </label>
                     <br/>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel>Categories</InputLabel>
-                        <Select
-                            multiple
-                            value={categories}
-                            onChange={changeCategories}
-                            input={<OutlinedInput label="Categories" />}
-                        >
-                            {optionalCategories.map(category=>
-                                <MenuItem
-                                    value={category}
-                                >
-                                    {category}
-                                </MenuItem>
-                            )}
-                        </Select>
-                    </FormControl>
-                    <br/>
-                    <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel>Muscle Groups</InputLabel>
-                        <Select
-                            multiple
-                            value={muscleGroups}
-                            onChange={changeMuscleGroups}
-                            input={<OutlinedInput label="MuscleGroups" />}
-                        >
-                            {optionalMuscles.map(muscle=>
-                                <MenuItem
-                                    value={muscle}
-                                >
-                                    {muscle}
-                                </MenuItem>
-                            )}
-                        </Select>
-                    </FormControl>
+                    <CategoryMuscleCheckbox categories={categories} changeCategories={changeCategories} muscleGroups={muscleGroups} changeMuscleGroups={changeMuscleGroups}/>
                     <br/>
                     <button type="submit">Edit</button>
                 </form>
