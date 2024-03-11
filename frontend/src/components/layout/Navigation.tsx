@@ -1,27 +1,25 @@
 import {Link} from "react-router-dom";
 import {MdHome} from "react-icons/md";
 import { GrAdd } from "react-icons/gr";
-
+import "./Navigation.css";
 export default function Navigation() {
     return (
         <>
             <nav className="nav">
-                <ul className="ul"
-                    style={{display: 'flex', justifyContent: 'space-between', listStyleType: 'none', padding: 0,margin: '0 60px'}}>
-                    <li className="icon-style" style={{display: 'flex', alignItems: 'center'}}>
+                <ul>
+                    <li className="icon-place">
                         <Link to={"/"}>
-                            <MdHome style={{verticalAlign: 'top', marginRight: '6px'}}/>Home
+                            <MdHome className="icon"/>Home
                         </Link>
                     </li>
-                    <li style={{fontSize: "40px",fontWeight: "bold", display: 'flex', alignItems: 'center'}}>
+                    <li className="title">
                         Fitness Freaks
                     </li>
-                    <li style={{display: 'flex', alignItems: 'center'}}>
+                    <li className="icon-place">
                         <Link to={"/workouts/add"}>
-                            <GrAdd style={{verticalAlign: 'top', marginRight: '6px'}}/>Add Workout
+                            <GrAdd className="icon"/>Add Workout
                         </Link>
                     </li>
-
                 </ul>
             </nav>
         </>
