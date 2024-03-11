@@ -2,6 +2,7 @@ import {ChangeEvent, FormEvent, useState} from "react";
 import {addWorkoutToLibrary, Workout} from "../utility_functions/addWorkout";
 import axios from 'axios';
 import {MuscleGroup} from '../types/Workout.ts';
+import {v4 as uuidv4} from 'uuid';
 
 const BACKEND_ENDPOINT = '/api/chat';
 export default function GenerateWorkoutPage() {
@@ -70,8 +71,8 @@ export default function GenerateWorkoutPage() {
                 <div>
                     <h3>Generated Workouts:</h3>
                     <ul>
-                        {generatedData.map((workout, index) => (
-                            <li key={`workout_${index}`}>
+                        {generatedData.map((workout) => (
+                            <li key={uuidv4()}>
                                 <strong>Name:</strong> {workout.name}, <strong>Description:</strong> {workout.description}
                                 <button onClick={() => handleAddToLibrary(workout)}>Add to Library</button>
                             </li>
