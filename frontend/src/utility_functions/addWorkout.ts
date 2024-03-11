@@ -3,6 +3,8 @@ import axios from 'axios';
 export type Workout = {
     name: string;
     description: string;
+    categories?: string[];
+    muscleGroups?: string[];
 };
 
 export const addWorkoutToLibrary = async (formData: Workout): Promise<void> => {
