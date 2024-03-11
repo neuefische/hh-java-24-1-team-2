@@ -39,6 +39,7 @@ export default function FilteredWorkouts(props: Readonly<FilterWorkoutsProps>){
             <label>
                 Search for:
                 <input type={"search"} value={searchName} onChange={handleSearchName}/>
+                <input type={"text"} value={searchName} onChange={handleSearchName}/>
             </label>
             <FormControl sx={{m: 1, width: 300}}>
                 <InputLabel>Choose category</InputLabel>
