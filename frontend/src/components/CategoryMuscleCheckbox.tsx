@@ -23,6 +23,7 @@ export default function CategoryMuscleCheckbox(props: Readonly<CategoryMuscleChe
                 >
                     {optionalCategories.map(category=>
                         <MenuItem
+                            key={category}
                             value={category}
                         >
                             {category}
@@ -41,6 +42,7 @@ export default function CategoryMuscleCheckbox(props: Readonly<CategoryMuscleChe
                 >
                     {optionalMuscles.map(muscle=>
                         <MenuItem
+                            key={muscle}
                             value={muscle}
                         >
                             {muscle}
