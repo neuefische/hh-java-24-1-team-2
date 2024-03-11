@@ -1,15 +1,13 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import {addWorkoutToLibrary, Workout} from "../utility_functions/addWorkout";
+import axios from 'axios';
+import {MuscleGroup} from '../types/Workout.ts';
 
+const BACKEND_ENDPOINT = '/api/chat';
 export default function GenerateWorkoutPage() {
     const [formData, setFormData] = useState( '');
     const [loading, setLoading] = useState(false);
     const [generatedData, setGeneratedData] = useState<Workout[] | null>(null);
-
-    interface ApiWorkout {
-        title: string;
-        body: string;
-    }
 
     const handleDropdownChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setFormData(event.target.value);
@@ -22,18 +20,11 @@ export default function GenerateWorkoutPage() {
             setGeneratedData(null);
             setLoading(true);
 
-            const fakeData: ApiWorkout[] = [
-                { title: 'Workout 1', body: 'Description 1' },
-                { title: 'Workout 2', body: 'Description 2' },
-                { title: 'Workout 3', body: 'Description 3' },
-            ];
+            const response = await axios.get(BACKEND_ENDPOINT, {
+                params: { muscle: formData },
+            });
 
-            await new Promise(resolve => setTimeout(resolve, 1500));
-
-            const workouts: Workout[] = fakeData.map((post: ApiWorkout) => ({
-                name: post.title,
-                description: post.body,
-            }));
+            const workouts: Workout[] = response.data.workouts;
 
             setGeneratedData(workouts);
             setFormData('');
@@ -56,17 +47,23 @@ export default function GenerateWorkoutPage() {
             <h2>Which muscles do you want to generate workouts for:</h2>
             <p>You will get three generated workouts you can then add to your library.</p>
             <form onSubmit={handleOnSubmit}>
-                <label htmlFor="dropdown">Select an option:</label>
-                <select id="dropdown" name="dropdown" value={formData} onChange={handleDropdownChange}>
+                <label htmlFor="muscledropdown">Select an option:</label>
+                <select
+                    id="muscledropdown"
+                    name="muscledropdown"
+                    value={formData}
+                    onChange={handleDropdownChange}
+                >
                     <option value="">Select...</option>
-                    <option value="chest">chest</option>
-                    <option value="back">back</option>
-                    <option value="arms">arms</option>
-                    <option value="abdominals">abdominals</option>
-                    <option value="legs">legs</option>
-                    <option value="shoulders">shoulders</option>
+                    {Object.values(MuscleGroup).map((muscle) => (
+                        <option key={muscle} value={muscle}>
+                            {muscle}
+                        </option>
+                    ))}
                 </select>
-                <button type="submit">Generate Workout</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Generating Workouts...' : 'Generate Workout'}
+                </button>
             </form>
             {loading && <p>Generating workouts...</p>}
             {generatedData && (

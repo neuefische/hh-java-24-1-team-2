@@ -7,7 +7,7 @@ import CategoryMuscleCheckbox from "../components/CategoryMuscleCheckbox.tsx";
 export default function AddWorkoutPage() {
     const [categories, setCategories]=useState<string[]>([]);
     const [muscleGroups, setMuscleGroups]=useState<string[]>([]);
-    const [formData, setFormData] = useState<Workout>({ name: '', description: '' });
+    const [formData, setFormData] = useState<Workout>({ name: '', description: '', muscleGroups: [], categories: [] });
 
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -27,26 +27,28 @@ export default function AddWorkoutPage() {
 
     function changeCategories(event: SelectChangeEvent<typeof categories>) {
         const value = event.target.value;
-        setCategories(typeof value === 'string' ? value.split(',') : value,);
+        const updatedCategories = typeof value === 'string' ? value.split(',') : value;
+        setCategories(updatedCategories);
         setFormData((prevData) => ({
             ...prevData,
-            categories: categories,
+            categories: updatedCategories,
         }));
     }
 
     function changeMuscleGroups(event: SelectChangeEvent<typeof muscleGroups>) {
-        const value=event.target.value;
-        setMuscleGroups(typeof value === 'string' ? value.split(',') : value,);
+        const value = event.target.value;
+        const updatedMuscleGroups = typeof value === 'string' ? value.split(',') : value;
+        setMuscleGroups(updatedMuscleGroups);
         setFormData((prevData) => ({
             ...prevData,
-            muscleGroups: muscleGroups,
+            muscleGroups: updatedMuscleGroups,
         }));
     }
 
     const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await addWorkoutToLibrary(formData);
-        setFormData({ name: '', description: '' });
+        setFormData({ name: '', description: '', categories: [], muscleGroups: [] });
         setCategories([]);
         setMuscleGroups([]);
     };
