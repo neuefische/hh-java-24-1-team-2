@@ -4,7 +4,10 @@ import "./AddWorkoutPage.css";
 import {SelectChangeEvent} from "@mui/material";
 import CategoryMuscleCheckbox from "../components/CategoryMuscleCheckbox.tsx";
 
-export default function AddWorkoutPage() {
+type AddWorkoutPageProps={
+    fetchData:()=>void;
+}
+export default function AddWorkoutPage(props: Readonly<AddWorkoutPageProps>) {
     const [categories, setCategories]=useState<string[]>([]);
     const [muscleGroups, setMuscleGroups]=useState<string[]>([]);
     const [formData, setFormData] = useState<Workout>({ name: '', description: '', muscleGroups: [], categories: [] });
@@ -47,7 +50,7 @@ export default function AddWorkoutPage() {
 
     const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await addWorkoutToLibrary(formData);
+        await addWorkoutToLibrary(formData, props.fetchData);
         setFormData({ name: '', description: '', categories: [], muscleGroups: [] });
         setCategories([]);
         setMuscleGroups([]);
