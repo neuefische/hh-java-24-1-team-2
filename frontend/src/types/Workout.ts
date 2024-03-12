@@ -7,11 +7,10 @@ export type Workout = {
 }
 
 export enum SportsCategory {
-    HIIT="HIIT",
     STRENGTH="STRENGTH",
-    CARDIO="CARDIO",
-    RUNNING="RUNNING",
-    YOGA="YOGA"
+    ENDURANCE="ENDURANCE",
+    BALANCE="BALANCE",
+    FLEXIBILITY="FLEXIBILITY"
 }
 export enum MuscleGroup {
     ABS="ABS",
