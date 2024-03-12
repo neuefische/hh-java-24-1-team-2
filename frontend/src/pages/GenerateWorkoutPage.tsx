@@ -5,7 +5,11 @@ import {MuscleGroup} from '../types/Workout.ts';
 import {v4 as uuidv4} from 'uuid';
 
 const BACKEND_ENDPOINT = '/api/chat';
-export default function GenerateWorkoutPage() {
+
+type GenerateWorkoutPageProps={
+    fetchData:()=>void;
+}
+export default function GenerateWorkoutPage(props: Readonly<GenerateWorkoutPageProps>) {
     const [formData, setFormData] = useState<string>('');
     const [loading, setLoading] = useState(false);
     const [generatedData, setGeneratedData] = useState<Workout[] | null>(null);
@@ -44,7 +48,7 @@ export default function GenerateWorkoutPage() {
     };
 
     const handleAddToLibrary = async (generatedWorkout: Workout) => {
-        await addWorkoutToLibrary(generatedWorkout);
+        await addWorkoutToLibrary(generatedWorkout, props.fetchData);
         setGeneratedData((prevData) => (prevData ? prevData.filter(workout => workout !== generatedWorkout) : null));
     };
 

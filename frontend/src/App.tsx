@@ -35,7 +35,7 @@ export default function App() {
                 <Route path="/workouts/:id" element={<DetailsPage workouts={workouts} fetchData={fetchData}/>}/>
                 <Route path="/workouts/add" element={<AddWorkoutPage fetchData={fetchData}/>}/>
                 <Route path="/workouts/:id/edit" element={<EditWorkoutPage workouts={workouts} fetchData={fetchData}/>} />
-                <Route path="/workouts/generate" element={<GenerateWorkoutPage/>}/>
+                <Route path="/workouts/generate" element={<GenerateWorkoutPage fetchData={fetchData}/>}/>
             </Routes>
             <Footer/>
         </div>
