@@ -1,4 +1,5 @@
 import {MuscleGroup, SportsCategory, Workout} from "../types/Workout.ts";
+import {Autocomplete, TextField} from "@mui/material";
 import {FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent} from "@mui/material";
 import {Autocomplete, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
@@ -20,14 +21,6 @@ export default function FilteredWorkouts(props: Readonly<FilterWorkoutsProps>){
         setSearchName(value);
     }
 
-    function handleSearchCategory(e: SelectChangeEvent<typeof searchCategory>){
-        setSearchCategory(e.target.value);
-    }
-
-    function handleSearchMuscle(e: SelectChangeEvent<typeof searchCategory>){
-        setSearchMuscle(e.target.value);
-    }
-
     const filteredWorkouts=props.workouts.filter(workout=>
         workout.name.includes(searchName) &&
         workout.categories.toString().includes(searchCategory) &&
@@ -44,6 +37,18 @@ export default function FilteredWorkouts(props: Readonly<FilterWorkoutsProps>){
                 <input type={"text"} value={searchName} onChange={handleSearchName}/>
                 <input type={"search"} value={searchName} onChange={handleSearchName}/>
             </label>
+            <Autocomplete
+                disablePortal
+                options={optionalCategories}
+                onInputChange={(_e, value) => setSearchCategory(value)}
+                sx={{m: 1, width: 300}}
+                renderInput={(params) => <TextField {...params} label="Choose Category" />}/>
+            <Autocomplete
+                disablePortal
+                options={optionalMuscles}
+                onInputChange={(_e, value) => setSearchMuscle(value)}
+                sx={{m: 1, width: 300}}
+                renderInput={(params) => <TextField {...params} label="Choose Muscle" />}/>
             <FormControl sx={{m: 1, width: 300}}>
                 <InputLabel>Choose category</InputLabel>
                 <Select
