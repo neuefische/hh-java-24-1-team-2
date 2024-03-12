@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum SportsCategory {
-    HIIT,
     STRENGTH,
-    CARDIO,
-    RUNNING,
-    YOGA
+    ENDURANCE,
+    BALANCE,
+    FLEXIBILITY
 }
