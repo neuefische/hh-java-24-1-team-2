@@ -23,8 +23,8 @@ public class OpenAiController {
                 .map(Enum::name)
                 .collect(Collectors.joining(", ", "'", "'"));
 
-        String q = "give me 3 workouts as json format for: " + muscle + ". The json should include a name attribute, a category attribute and a description attribute. " +
-                "category should be one of the following for each Workout: " + categories + ". " +
+        String q = "give me 3 workouts as json format for: " + muscle + ". The json should include a name attribute, a categories attribute and a description attribute. " +
+                "categories should include one or more of the following for each Workout: " + categories + ". " +
                 "Description should not be longer than 50 words.";
         return service.askQuestion(q);
     }
