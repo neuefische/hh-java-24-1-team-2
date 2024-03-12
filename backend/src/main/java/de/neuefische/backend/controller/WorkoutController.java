@@ -24,8 +24,8 @@ public class WorkoutController {
     }
 
     @PutMapping("/{id}")
-    public Workout update(@PathVariable String id,@RequestBody Workout workout){
-        return service.update(id,workout);
+    public Workout update(@PathVariable String id,@RequestBody WorkoutDto workoutDto){
+        return service.update(id,workoutDto);
     }
 
     @PostMapping
