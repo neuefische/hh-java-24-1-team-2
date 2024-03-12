@@ -19,7 +19,7 @@ export default function FilteredWorkouts(props: Readonly<FilterWorkoutsProps>) {
         setSearchName(value);
     }
 
-    const sortedWorkouts=props.workouts.sort(function (a, b) {
+    const sortedWorkouts=[...props.workouts].sort(function (a, b) {
         if (a.name < b.name) {
             return -1;
         }
