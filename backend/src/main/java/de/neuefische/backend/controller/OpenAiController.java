@@ -16,7 +16,8 @@ public class OpenAiController {
     @GetMapping
     public String askQuestion(@RequestParam String muscle) {
 
-        String q = "give me 3 workouts as json format for: " + muscle + ". The json should include a name attribute, and a description attribute. " +
+        String q = "give me 3 workouts as json format for: " + muscle + ". The json should include a name attribute, a category attribute and a description attribute. " +
+                "category should be one of the following: 'STRENGTH', 'ENDURANCE', 'BALANCE', 'FLEXIBILITY'. " +
                 "Description should not be longer than 50 words.";
         return service.askQuestion(q);
     }
