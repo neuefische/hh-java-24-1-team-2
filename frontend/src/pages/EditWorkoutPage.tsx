@@ -10,15 +10,16 @@ export type Props = {
     workouts: Workout[],
     fetchData: ()=>void
 };
+
 export default function EditWorkoutPage(props: Props) {
     const params = useParams();
     const navigate = useNavigate();
 
     const workout = props.workouts.find(workout => workout.id === params.id);
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [categories, setCategories]=useState<string[]>([]);
-    const [muscleGroups, setMuscleGroups]=useState<string[]>([]);
+    const [name, setName] = useState(workout ? workout.name : '');
+    const [description, setDescription] = useState(workout ? workout.description : '');
+    const [categories, setCategories]=useState<string[]>(workout && Array.isArray(workout.categories) ? workout.categories : []);
+    const [muscleGroups, setMuscleGroups]=useState<string[]>(workout && Array.isArray(workout.muscleGroups) ? workout.muscleGroups : []);
 
     function changeText(event: React.ChangeEvent<HTMLInputElement>) {
         setDescription(event.target.value);
@@ -62,12 +63,12 @@ export default function EditWorkoutPage(props: Props) {
                 <form onSubmit={editThisItem}>
                     <label>
                         Name:
-                        <input type="text" value={name} onChange={changeName}/>
+                        <input type="text"  value={name} onChange={changeName} required />
                     </label>
                     <br/>
                     <label>
                         Description:
-                        <input type="text" value={description} onChange={changeText}/>
+                        <input type="text" value={description} onChange={changeText} required/>
                     </label>
                     <br/>
                     <CategoryMuscleCheckbox categories={categories} changeCategories={changeCategories} muscleGroups={muscleGroups} changeMuscleGroups={changeMuscleGroups}/>
