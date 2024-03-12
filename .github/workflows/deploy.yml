@@ -82,7 +82,7 @@ jobs:
     needs: push-to-docker-hub
     environment:
       name: Fitness Freaks
-      url: https://neuefische.de/ # Link to deployment
+      url: https://fitnessfreaks-c7jd.onrender.com # Link to deployment
     steps:
       - name: Trigger Render.com Deployment
         run: |
