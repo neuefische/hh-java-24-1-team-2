@@ -44,12 +44,7 @@ export default function GenerateWorkoutPage() {
     };
 
     const handleAddToLibrary = async (generatedWorkout: Workout) => {
-        const updatedWorkout = {
-            ...generatedWorkout,
-            muscleGroups: [...(generatedWorkout.muscleGroups || []), formData],
-        };
-
-        await addWorkoutToLibrary(updatedWorkout);
+        await addWorkoutToLibrary(generatedWorkout);
         setGeneratedData((prevData) => (prevData ? prevData.filter(workout => workout !== generatedWorkout) : null));
     };
 
