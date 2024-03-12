@@ -6,13 +6,14 @@ import {v4 as uuidv4} from 'uuid';
 
 const BACKEND_ENDPOINT = '/api/chat';
 export default function GenerateWorkoutPage() {
-    const [formData, setFormData] = useState( '');
+    const [formData, setFormData] = useState<string>('');
     const [loading, setLoading] = useState(false);
     const [generatedData, setGeneratedData] = useState<Workout[] | null>(null);
 
     const handleDropdownChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setFormData(event.target.value);
     };
+
 
     const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -27,7 +28,12 @@ export default function GenerateWorkoutPage() {
 
             const workouts: Workout[] = response.data.workouts;
 
-            setGeneratedData(workouts);
+            const workoutsWithMuscleGroup = workouts.map(workout => ({
+                ...workout,
+                muscleGroups: [...(workout.muscleGroups || []), formData],
+            }));
+
+            setGeneratedData(workoutsWithMuscleGroup);
             setFormData('');
             alert(`Workouts for "${formData}" are generated.`);
         } catch (error) {
@@ -38,7 +44,9 @@ export default function GenerateWorkoutPage() {
     };
 
     const handleAddToLibrary = async (generatedWorkout: Workout) => {
-        await addWorkoutToLibrary(generatedWorkout);
+        const workoutWithChosenMuscleGroup = { ...generatedWorkout, muscleGroups: [formData] };
+
+        await addWorkoutToLibrary(workoutWithChosenMuscleGroup);
         setGeneratedData((prevData) => (prevData ? prevData.filter(workout => workout !== generatedWorkout) : null));
     };
 
@@ -72,8 +80,18 @@ export default function GenerateWorkoutPage() {
                     <h3>Generated Workouts:</h3>
                     <ul>
                         {generatedData.map((workout) => (
-                            <li key={uuidv4()}>
-                                <strong>Name:</strong> {workout.name}, <strong>Description:</strong> {workout.description}
+                            <li key={uuidv4()} style={{
+                                marginBottom: '15px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between'
+                            }}>
+                                <div>
+                                    <strong>Name:</strong> {workout.name} <br/>
+                                    <strong>Description:</strong> {workout.description} <br/>
+                                    <strong>Muscle Group:</strong> {workout.muscleGroups?.map(mg => <span key={mg}>{mg}</span>)} <br/>
+                                    <strong>Categories:</strong> {workout.categories?.join(', ')}
+                                </div>
                                 <button onClick={() => handleAddToLibrary(workout)}>Add to Library</button>
                             </li>
                         ))}
