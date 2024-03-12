@@ -86,13 +86,14 @@ class WorkoutServiceTest {
         //GIVEN
         String id = "123";
         Workout workout = new Workout(id, "test-name", "test-description", List.of(SportsCategory.STRENGTH, SportsCategory.ENDURANCE), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
-        Workout expected = new Workout(id, "test-name-change", "test-description-change", List.of(SportsCategory.STRENGTH, SportsCategory.STRENGTH), List.of(MuscleGroup.LEGS));
+        WorkoutDto workoutDto = new WorkoutDto("test-name-change", "test-description-change", List.of(SportsCategory.STRENGTH), List.of(MuscleGroup.LEGS));
+        Workout expected = new Workout(id, "test-name-change", "test-description-change", List.of(SportsCategory.STRENGTH), List.of(MuscleGroup.LEGS));
 
         when(repo.findById(id)).thenReturn(Optional.of(workout));
         when(repo.save(any(Workout.class))).thenReturn(expected);
 
         //WHEN
-        Workout actual = service.update(id, expected);
+        Workout actual = service.update(id, workoutDto);
 
         //THEN
         verify(repo, times(1)).findById(id);

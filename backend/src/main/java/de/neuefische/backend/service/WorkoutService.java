@@ -26,12 +26,12 @@ public class WorkoutService {
         return repo.save(temp);
     }
 
-    public Workout update(String id, Workout workout) {
+    public Workout update(String id, WorkoutDto workoutDto) {
         Workout temp = repo.findById(id).orElseThrow();
-        temp.setName(workout.getName());
-        temp.setDescription(workout.getDescription());
-        temp.setCategories(workout.getCategories());
-        temp.setMuscleGroups(workout.getMuscleGroups());
+        temp.setName(workoutDto.getName());
+        temp.setDescription(workoutDto.getDescription());
+        temp.setCategories(workoutDto.getCategories());
+        temp.setMuscleGroups(workoutDto.getMuscleGroups());
         return repo.save(temp);
     }
 
