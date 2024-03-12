@@ -63,7 +63,7 @@ class WorkoutControllerTest {
     @Test
     void getAllWorkouts_ReturnId1nameTestNameDescriptionTestDescription_WhenCalledWithOneWorkout() throws Exception {
         //GIVEN
-        Workout workout = new Workout("1", "test-name", "test-description", List.of(SportsCategory.HIIT, SportsCategory.CARDIO), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
+        Workout workout = new Workout("1", "test-name", "test-description", List.of(SportsCategory.STRENGTH, SportsCategory.ENDURANCE), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
         repo.save(workout);
         //WHEN & THEN
         mvc.perform(MockMvcRequestBuilders.get("/api/workouts"))
@@ -74,7 +74,7 @@ class WorkoutControllerTest {
                                     "id": "1",
                                     "name": "test-name",
                                     "description": "test-description",
-                                    "categories": ["HIIT", "CARDIO"],
+                                    "categories": ["STRENGTH", "ENDURANCE"],
                                     "muscleGroups": ["LEGS", "GLUTES"]
                                 }
                             ]
@@ -85,7 +85,7 @@ class WorkoutControllerTest {
     @Test
     void getWorkoutById_ReturnWorkoutWithId1_WhenCalledWithId1() throws Exception {
         //GIVEN
-        Workout workout = new Workout("1", "test-name", "test-description", List.of(SportsCategory.HIIT, SportsCategory.CARDIO), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
+        Workout workout = new Workout("1", "test-name", "test-description", List.of(SportsCategory.STRENGTH, SportsCategory.ENDURANCE), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
         repo.save(workout);
         //WHEN & THEN
         mvc.perform(MockMvcRequestBuilders.get("/api/workouts/1"))
@@ -95,7 +95,7 @@ class WorkoutControllerTest {
                                 "id": "1",
                                 "name": "test-name",
                                 "description": "test-description",
-                                "categories": ["HIIT", "CARDIO"],
+                                "categories": ["STRENGTH", "ENDURANCE"],
                                 "muscleGroups": ["LEGS", "GLUTES"]
                             }
                         """))
@@ -105,7 +105,7 @@ class WorkoutControllerTest {
     @Test
     void update() throws Exception {
         //GIVEN
-        Workout existingTodo = new Workout("1", "test-name", "test-description", List.of(SportsCategory.HIIT, SportsCategory.CARDIO), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
+        Workout existingTodo = new Workout("1", "test-name", "test-description", List.of(SportsCategory.STRENGTH, SportsCategory.ENDURANCE), List.of(MuscleGroup.LEGS, MuscleGroup.GLUTES));
         repo.save(existingTodo);
 
         //WHEN
@@ -115,7 +115,7 @@ class WorkoutControllerTest {
                                     {
                                         "name": "test-name",
                                         "description": "test-description",
-                                "categories": ["HIIT", "CARDIO"],
+                                "categories": ["STRENGTH", "ENDURANCE"],
                                 "muscleGroups": ["LEGS", "GLUTES"]
                                     }
                                 """))
@@ -126,7 +126,7 @@ class WorkoutControllerTest {
                                 "id": "1",
                                 "name": "test-name",
                                 "description": "test-description",
-                                "categories": ["HIIT", "CARDIO"],
+                                "categories": ["STRENGTH", "ENDURANCE"],
                                 "muscleGroups": ["LEGS", "GLUTES"]
                             }
                         """));
