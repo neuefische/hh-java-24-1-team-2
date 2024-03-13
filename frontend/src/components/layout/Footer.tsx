@@ -1,8 +1,11 @@
+import {Copyright} from "@mui/icons-material";
+import "./Footer.css";
+
 export default function Footer(){
     return (
         <footer className={"foot"}>
             <ul>
-                created by :
+                <Copyright/>&nbsp;
                 <li>Reebal Sami</li>
                 <li>Aaron Becher</li>
                 <li>Jessica Zarnowski</li>
