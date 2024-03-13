@@ -11,6 +11,7 @@ export default function HomePage(props: Readonly<HomePageProps>) {
     return (
         <div className={"homepage"} >
             <h1>Workouts</h1>
+
             <FilteredWorkouts workouts={props.workouts}/>
         </div>
     )
