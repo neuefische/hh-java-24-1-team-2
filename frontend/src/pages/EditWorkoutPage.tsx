@@ -2,7 +2,9 @@ import {Workout} from "../types/Workout.ts";
 import axios from "axios";
 import {FormEvent, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import "/src/App.css"
+import "/src/App.css";
+import "./EditWorkoutPage.css";
+
 import CategoryMuscleCheckbox from "../components/CategoryMuscleCheckbox.tsx";
 import {SelectChangeEvent} from "@mui/material";
 
@@ -55,11 +57,8 @@ export default function EditWorkoutPage(props: Props) {
 
     return (
         <>
-            <div className="edit-title">
-            <h1>Edit Workout Page</h1>
             <div className="edit-workout-container">
-
-                <p>Edit your workout here</p>
+                <h2>Edit your workout here</h2>
                 <form onSubmit={editThisItem}>
                     <label>
                         Name:
@@ -75,7 +74,6 @@ export default function EditWorkoutPage(props: Props) {
                     <br/>
                     <button type="submit">Edit</button>
                 </form>
-            </div>
             </div>
         </>
     );

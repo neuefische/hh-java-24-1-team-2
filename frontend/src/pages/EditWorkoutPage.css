@@ -1,0 +1,38 @@
+.edit-workout-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+.edit-workout-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.edit-workout-container form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.edit-workout-container form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.edit-workout-container form button {
+    padding: 10px 20px;
+    background-color: darkslategray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-workout-container form button:hover {
+    background-color: darkslategray;
+}
+
