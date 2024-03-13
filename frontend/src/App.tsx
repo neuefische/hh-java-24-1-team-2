@@ -28,9 +28,8 @@ export default function App() {
     }
 
     return (
-        <div>
+        <div  className={"mainPage"}>
             <Header/>
-            <div className={"pages"}>
                 <Routes>
                     <Route path="/" element={<HomePage workouts={workouts} setWorkouts={setWorkouts}/>}/>
                     <Route path="/workouts/:id" element={<DetailsPage workouts={workouts} fetchData={fetchData}/>}/>
@@ -38,7 +37,6 @@ export default function App() {
                     <Route path="/workouts/:id/edit" element={<EditWorkoutPage workouts={workouts} fetchData={fetchData}/>} />
                     <Route path="/workouts/generate" element={<GenerateWorkoutPage fetchData={fetchData}/>}/>
                 </Routes>
-            </div>
             <Footer/>
         </div>
     )
