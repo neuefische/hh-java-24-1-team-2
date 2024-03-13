@@ -19,20 +19,33 @@ export default function FilteredWorkouts(props: Readonly<FilterWorkoutsProps>) {
         setSearchName(value);
     }
 
-    const sortedWorkouts=[...props.workouts].sort(function (a, b) {
+    const sortedWorkouts = [...props.workouts].sort(function (a, b) {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+
         if (a.name < b.name) {
             return -1;
         }
         if (a.name > b.name) {
             return 1;
         }
-        return 0;});
 
-    const filteredWorkouts = sortedWorkouts.filter(workout =>
-                                                          workout.name.toLowerCase().includes(searchName) &&
-                                                          workout.categories.toString().includes(searchCategory) &&
-                                                          workout.muscleGroups.toString().includes(searchMuscle));
+        return 0;
+    });
 
+    const filteredWorkouts = sortedWorkouts.filter(
+        (workout) =>
+            workout.name.toLowerCase().includes(searchName) &&
+            workout.categories.toString().includes(searchCategory) &&
+            workout.muscleGroups.toString().includes(searchMuscle)
+    );
 
     return (
         <>
