@@ -1,0 +1,13 @@
+.searchForm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.searchTextField{
+    flex-grow: 1;
+}
+
+.workoutList{
+    padding: 0;
+}
