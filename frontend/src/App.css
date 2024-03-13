@@ -13,11 +13,13 @@ body{
 .homepage{
     margin: 120px 60px 60px 60px;
     font-size: large;
-    font-family: Bahnschrift,sans-serif;
 }
 
-.pages{
-    min-height: 678px;
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    row-gap: 20px;
 }
 
 button {
@@ -25,11 +27,25 @@ button {
     color: #fff;
     padding: 12px 20px;
     margin: 5px;
+    font-size: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
+.workoutDetails .deleteButton{
+    background-color: darkred;
+    color: #fff;
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.workoutDetails .deleteButton:hover{
+    background-color: red;
+}
 button:hover {
     background-color: #4caf50;
 }
