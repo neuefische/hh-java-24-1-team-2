@@ -1,7 +1,8 @@
 import {MuscleGroup, SportsCategory, Workout} from "../types/Workout.ts";
 import {Autocomplete, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
-import {Link} from "react-router-dom";
+import "./FilteredWorkouts.css"
+import WorkoutCard from "./WorkoutCard.tsx";
 
 export type FilterWorkoutsProps = {
     workouts: Workout[];
@@ -49,10 +50,8 @@ export default function FilteredWorkouts(props: Readonly<FilterWorkoutsProps>) {
 
     return (
         <>
-            <label>
-                Search for:
-                <input type={"search"} value={searchName} onChange={handleSearchName}/>
-            </label>
+        <div className={"searchForm"}>
+            <TextField className="searchTextField" label="Search for workout" type={"search"} value={searchName} onChange={handleSearchName}/>
             <Autocomplete
                 disablePortal
                 options={optionalCategories}
@@ -65,16 +64,12 @@ export default function FilteredWorkouts(props: Readonly<FilterWorkoutsProps>) {
                 onInputChange={(_e, value) => setSearchMuscle(value)}
                 sx={{m: 1, width: 300}}
                 renderInput={(params) => <TextField {...params} label="Choose Muscle" />}/>
-            <ul>
-                {filteredWorkouts.map(workout => (
-                    <li key={workout.id}>
-                        <Link to={`/workouts/${workout.id}`}>
-                            {workout.name}
-                        </Link>
-                    </li>
-                ))}
+        </div>
+            <ul className={"workoutList"}>
+                {filteredWorkouts.map(workout => <WorkoutCard
+                    key={workout.id}
+                    workout={workout}/>)}
             </ul>
-
         </>
     )
 }

@@ -1,33 +1,35 @@
 .container {
+    padding-top: 60px;
     text-align: center;
+    max-width: 400px;
+    margin: auto;
 }
 
-.workoutDetails {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 20px;
-}
-
-.workoutDetails h3 {
-    margin-top: 0;
-}
-
-.workoutDetails p {
-    margin-bottom: 10px;
-}
-
-.workoutDetails button {
-    margin-right: 10px;
-    background-color: darkslategray;
-}
 
 body{
     font-family: Arial,sans-serif;
+    margin: 0;
 }
 .homepage{
-    margin: 60px;
+    margin: 120px 60px 60px 60px;
     font-size: large;
     font-family: Bahnschrift,sans-serif;
 }
 
+.pages{
+    min-height: 678px;
+}
+
+button {
+    background-color: darkslategray;
+    color: #fff;
+    padding: 12px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4caf50;
+}

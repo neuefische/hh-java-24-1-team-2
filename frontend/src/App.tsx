@@ -30,13 +30,15 @@ export default function App() {
     return (
         <div>
             <Header/>
-            <Routes>
-                <Route path="/" element={<HomePage workouts={workouts} setWorkouts={setWorkouts}/>}/>
-                <Route path="/workouts/:id" element={<DetailsPage workouts={workouts} fetchData={fetchData}/>}/>
-                <Route path="/workouts/add" element={<AddWorkoutPage workouts={workouts} fetchData={fetchData}/>}/>
-                <Route path="/workouts/:id/edit" element={<EditWorkoutPage workouts={workouts} fetchData={fetchData}/>} />
-                <Route path="/workouts/generate" element={<GenerateWorkoutPage fetchData={fetchData}/>}/>
-            </Routes>
+            <div className={"pages"}>
+                <Routes>
+                    <Route path="/" element={<HomePage workouts={workouts} setWorkouts={setWorkouts}/>}/>
+                    <Route path="/workouts/:id" element={<DetailsPage workouts={workouts} fetchData={fetchData}/>}/>
+                    <Route path="/workouts/add" element={<AddWorkoutPage workouts={workouts} fetchData={fetchData}/>}/>
+                    <Route path="/workouts/:id/edit" element={<EditWorkoutPage workouts={workouts} fetchData={fetchData}/>} />
+                    <Route path="/workouts/generate" element={<GenerateWorkoutPage fetchData={fetchData}/>}/>
+                </Routes>
+            </div>
             <Footer/>
         </div>
     )

@@ -57,7 +57,7 @@ export default function EditWorkoutPage(props: Props) {
 
     return (
         <>
-            <div className="edit-workout-container">
+            <div className="container">
                 <h2>Edit your workout here</h2>
                 <form onSubmit={editThisItem}>
                     <label>

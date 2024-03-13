@@ -22,17 +22,5 @@
     border-radius: 5px;
 }
 
-.edit-workout-container form button {
-    padding: 10px 20px;
-    background-color: darkslategray;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
 
-.edit-workout-container form button:hover {
-    background-color: darkslategray;
-}
 

@@ -1,11 +1,10 @@
 .foot{
-    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     text-align: center;
     background-color: lightsteelblue;
-    padding: 10px;
+padding: 10px 0 10px 0;
 }
 
 .foot ul{
