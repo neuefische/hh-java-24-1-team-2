@@ -42,7 +42,7 @@ export default function FilteredWorkouts(props: Readonly<FilterWorkoutsProps>) {
 
     const filteredWorkouts = sortedWorkouts.filter(
         (workout) =>
-            workout.name.toLowerCase().includes(searchName) &&
+            workout.name.toLowerCase().includes(searchName.toLowerCase()) &&
             workout.categories.toString().includes(searchCategory) &&
             workout.muscleGroups.toString().includes(searchMuscle)
     );
