@@ -3,14 +3,19 @@ import {addWorkoutToLibrary, Workout} from "../utility_functions/addWorkout";
 import "./AddWorkoutPage.css";
 import {SelectChangeEvent} from "@mui/material";
 import CategoryMuscleCheckbox from "../components/CategoryMuscleCheckbox.tsx";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 type AddWorkoutPageProps={
     fetchData:()=>void;
+    workouts: Workout[]
 }
 export default function AddWorkoutPage(props: Readonly<AddWorkoutPageProps>) {
     const [categories, setCategories]=useState<string[]>([]);
     const [muscleGroups, setMuscleGroups]=useState<string[]>([]);
     const [formData, setFormData] = useState<Workout>({ name: '', description: '', muscleGroups: [], categories: [] });
+    const [error, setError] = useState(false);
+
 
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -18,6 +23,7 @@ export default function AddWorkoutPage(props: Readonly<AddWorkoutPageProps>) {
             ...prevData,
             name: value,
         }));
+        setError(false);
     };
 
     const handleChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -50,10 +56,20 @@ export default function AddWorkoutPage(props: Readonly<AddWorkoutPageProps>) {
 
     const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const matchingWorkout = props.workouts.find(workout => workout.name === formData.name);
+        if (matchingWorkout) {
+            setError(true);
+            return;
+        }
+
         await addWorkoutToLibrary(formData, props.fetchData);
         setFormData({ name: '', description: '', categories: [], muscleGroups: [] });
         setCategories([]);
         setMuscleGroups([]);
+    };
+    const handleCloseError = () => {
+        setError(false);
     };
 
     return (
@@ -63,19 +79,25 @@ export default function AddWorkoutPage(props: Readonly<AddWorkoutPageProps>) {
             <form onSubmit={handleOnSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChangeName}/>
+                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChangeName} required/>
                 </div>
                 <div>
-                    <label htmlFor="description">Description:</label>
+                    <label htmlFor="description" >Description:</label>
                     <textarea
                         id="description"
                         name="description"
                         value={formData.description}
                         onChange={handleChangeDescription}
+                        required
                     />
                 </div>
                 <CategoryMuscleCheckbox categories={categories} changeCategories={changeCategories} muscleGroups={muscleGroups} changeMuscleGroups={changeMuscleGroups}/>
                 <button type="submit">Add Workout</button>
+                <Snackbar open={error} autoHideDuration={6000} onClose={handleCloseError}>
+                    <MuiAlert elevation={6} variant="filled" onClose={handleCloseError} severity="error">
+                        There is a name registered in the past!
+                    </MuiAlert>
+                </Snackbar>
             </form>
         </div>
     );
