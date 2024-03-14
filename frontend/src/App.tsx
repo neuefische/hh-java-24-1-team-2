@@ -29,7 +29,7 @@ export default function App() {
     }
 
     function login() {
-        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.origin
+        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.host
 
         window.open(host + '/oauth2/authorization/github', '_self')
     }
@@ -58,10 +58,11 @@ export default function App() {
     return (
         <div  className={"mainPage"}>
             <Header/>
-            {user === null && <button onClick={login}>Login</button>}
+            <div className={"login"}>
+                {user === null && <button onClick={login}>Login</button>}
             {user !== null && <p>Hallo {user}</p>}
             {user !== null && <button onClick={logout}>Logout</button>}
-
+            </div>
             <Routes>
                 <Route path="/" element={<HomePage workouts={workouts} setWorkouts={setWorkouts}/>}/>
                 <Route element={<ProtectedRoutes user={user} />}>

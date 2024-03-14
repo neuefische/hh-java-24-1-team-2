@@ -25,6 +25,7 @@ export default function Navigation() {
                         <Link to={"/"}>
                             <MdHome className="icon"/>Home
                         </Link>
+
                     </li>
                     <li className="title">
                         Fitness Freaks

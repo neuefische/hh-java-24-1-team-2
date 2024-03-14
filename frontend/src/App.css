@@ -5,6 +5,9 @@
     margin: auto;
 }
 
+.login {
+    margin-top: 80px
+}
 
 body{
     font-family: Arial,sans-serif;
