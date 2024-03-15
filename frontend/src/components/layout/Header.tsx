@@ -1,10 +1,13 @@
 import Navigation from "./Navigation.tsx";
 import "./Header.css"
 
-export default function Header() {
+type HeaderProps={
+    user:string | undefined | null
+}
+export default function Header(props: Readonly<HeaderProps>) {
     return (
             <header>
-                <Navigation/>
+                <Navigation user={props.user}/>
             </header>
     )
 }

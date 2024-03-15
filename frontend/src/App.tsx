@@ -14,31 +14,11 @@ import ProtectedRoutes from "./ProtectedRoutes.tsx";
 
 export default function App() {
     const [workouts, setWorkouts] = useState<Workout[]>([]);
-
     const [user, setUser] = useState<string | undefined | null>(undefined);
 
     useEffect(() => {
         loadUser()
     }, [])
-    function fetchData(){
-        axios.get("/api/workouts")
-            .then(response=> setWorkouts(response.data))
-            .catch(error => {
-            console.error("Error fetching workouts", error)
-        })
-    }
-
-    function login() {
-        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.host
-
-        window.open(host + '/oauth2/authorization/github', '_self')
-    }
-
-    function logout() {
-        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.origin
-
-        window.open(host + '/logout', '_self')
-    }
 
     const loadUser = () => {
         axios.get('/api/auth/me')
@@ -50,6 +30,14 @@ export default function App() {
             })
     }
 
+    function fetchData(){
+        axios.get("/api/workouts")
+            .then(response=> setWorkouts(response.data))
+            .catch(error => {
+                console.error("Error fetching workouts", error)
+            })
+    }
+
     useEffect(fetchData, []);
     if (!workouts) {
         return "Loading..."
@@ -57,12 +45,7 @@ export default function App() {
 
     return (
         <div  className={"mainPage"}>
-            <Header/>
-            <div className={"login"}>
-                {user === null && <button onClick={login}>Login</button>}
-            {user !== null && <p>Hallo {user}</p>}
-            {user !== null && <button onClick={logout}>Logout</button>}
-            </div>
+            <Header user={user}/>
             <Routes>
                 <Route path="/" element={<HomePage workouts={workouts} setWorkouts={setWorkouts}/>}/>
                 <Route element={<ProtectedRoutes user={user} />}>
