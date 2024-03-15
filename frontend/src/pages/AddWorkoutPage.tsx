@@ -77,27 +77,32 @@ export default function AddWorkoutPage(props: Readonly<AddWorkoutPageProps>) {
         <div className="container">
             <h2>Please add a new workout here:</h2>
             <form onSubmit={handleOnSubmit}>
-                <div>
-                    <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChangeName} required/>
+                <div className={"container nameDescription"}>
+                    <div>
+                        <label htmlFor="name">Name:</label>
+                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChangeName}
+                               required/>
+                    </div>
+                    <div>
+                        <label htmlFor="description">Description:</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChangeDescription}
+                            required
+                        />
+                    </div>
+
+                    <CategoryMuscleCheckbox categories={categories} changeCategories={changeCategories}
+                                            muscleGroups={muscleGroups} changeMuscleGroups={changeMuscleGroups}/>
+                    <button type="submit">Add Workout</button>
+                    <Snackbar open={error} autoHideDuration={6000} onClose={handleCloseError}>
+                        <MuiAlert elevation={6} variant="filled" onClose={handleCloseError} severity="error">
+                            There is a name registered in the past!
+                        </MuiAlert>
+                    </Snackbar>
                 </div>
-                <div>
-                    <label htmlFor="description" >Description:</label>
-                    <textarea
-                        id="description"
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChangeDescription}
-                        required
-                    />
-                </div>
-                <CategoryMuscleCheckbox categories={categories} changeCategories={changeCategories} muscleGroups={muscleGroups} changeMuscleGroups={changeMuscleGroups}/>
-                <button type="submit">Add Workout</button>
-                <Snackbar open={error} autoHideDuration={6000} onClose={handleCloseError}>
-                    <MuiAlert elevation={6} variant="filled" onClose={handleCloseError} severity="error">
-                        There is a name registered in the past!
-                    </MuiAlert>
-                </Snackbar>
             </form>
         </div>
     );

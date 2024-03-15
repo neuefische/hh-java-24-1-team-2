@@ -60,21 +60,24 @@ export default function EditWorkoutPage(props: Props) {
             <div className="container">
                 <h2>Edit your workout here</h2>
                 <form onSubmit={editThisItem}>
-                    <label>
-                        Name:
-                        <input type="text"  value={name} onChange={changeName} required />
-                    </label>
-                    <br/>
-                    <label>
-                        Description:
-                        <input type="text" value={description} onChange={changeText} required/>
-                    </label>
-                    <br/>
-                    <CategoryMuscleCheckbox categories={categories} changeCategories={changeCategories} muscleGroups={muscleGroups} changeMuscleGroups={changeMuscleGroups}/>
-                    <br/>
-                    <button type="submit">Edit</button>
+                    <div className={"container nameDescription"}>
+                        <label>
+                            Name:
+                            <input type="text" value={name} onChange={changeName} required/>
+                        </label>
+                        <br/>
+                        <label>
+                            Description:
+                            <input type="text" value={description} onChange={changeText} required/>
+                        </label>
+                        <br/>
+                        <CategoryMuscleCheckbox categories={categories} changeCategories={changeCategories}
+                                                muscleGroups={muscleGroups} changeMuscleGroups={changeMuscleGroups}/>
+                        <br/>
+                        <button type="submit">Edit</button>
+                        </div>
                 </form>
             </div>
         </>
-    );
+);
 }
