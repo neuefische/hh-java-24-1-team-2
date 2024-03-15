@@ -23,7 +23,7 @@ export default function EditWorkoutPage(props: Props) {
     const [categories, setCategories]=useState<string[]>(workout && Array.isArray(workout.categories) ? workout.categories : []);
     const [muscleGroups, setMuscleGroups]=useState<string[]>(workout && Array.isArray(workout.muscleGroups) ? workout.muscleGroups : []);
 
-    function changeText(event: React.ChangeEvent<HTMLInputElement>) {
+    function changeText(event: React.ChangeEvent<HTMLTextAreaElement>) {
         setDescription(event.target.value);
     }
 
@@ -68,7 +68,13 @@ export default function EditWorkoutPage(props: Props) {
                         <br/>
                         <label>
                             Description:
-                            <input type="text" value={description} onChange={changeText} required/>
+                            <textarea
+                                id="description"
+                                name="description"
+                                value={description}
+                                onChange={changeText}
+                                required
+                            />
                         </label>
                         <br/>
                         <CategoryMuscleCheckbox categories={categories} changeCategories={changeCategories}
