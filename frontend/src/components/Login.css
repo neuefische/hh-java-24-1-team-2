@@ -1,0 +1,11 @@
+.loginName{
+    font-size: 15px;
+}
+
+.loginButtons{
+    background-color: #ffffff;
+}
+
+.loginButtons:hover{
+    background-color: #82b2c7;
+}

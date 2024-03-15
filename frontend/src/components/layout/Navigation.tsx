@@ -4,8 +4,12 @@ import "./Navigation.css";
 import {Button, Menu, MenuItem} from "@mui/material";
 import {useState} from "react";
 import {PostAdd} from "@mui/icons-material";
+import Login from "../Login.tsx";
 
-export default function Navigation() {
+type NavigationProps={
+    user: string | undefined | null
+}
+export default function Navigation(props: Readonly<NavigationProps>) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const navigate=useNavigate();
@@ -22,20 +26,25 @@ export default function Navigation() {
             <nav className="nav">
                 <ul>
                     <li className="icon-place">
-                        <Link to={"/"}>
+                        <li className={"icon-place home"}>
+                            <Link to={"/"}>
                             <MdHome className="icon"/>Home
-                        </Link>
-
+                            </Link>
+                        </li>
+                        <li className={"icon-place add-area"}>
+                            <Button onClick={handleClick} startIcon={<PostAdd/>}>Add workout</Button>
+                                <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                                    <MenuItem onClick={() => navigate("/workouts/add")}>manually</MenuItem>
+                                    <MenuItem onClick={() => navigate("/workouts/generate")}>generate randomly</MenuItem>
+                                </Menu>
+                        </li>
                     </li>
                     <li className="title">
                         Fitness Freaks
                     </li>
-                    <li className="icon-place add-area">
-                        <Button onClick={handleClick} startIcon={<PostAdd/>}>Add workout</Button>
-                        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                            <MenuItem onClick={()=>navigate("/workouts/add")}>manually</MenuItem>
-                            <MenuItem onClick={()=>navigate("/workouts/generate")}>generate randomly</MenuItem>
-                        </Menu>
+
+                    <li className="icon-place">
+                        <Login user={props.user}/>
                     </li>
 
                 </ul>
